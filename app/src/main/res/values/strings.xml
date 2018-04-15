@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">Sentia Test - Ali Kazi</string>
+    <string name="action_settings">Settings</string>
+    <string name="refresh">Refresh</string>
+    <string name="feed_empty_list_message">Loading feed&#8230;</string>
+    <string name="feed_empty_list_error_message">Couldn\'t load feed</string>
+    <string name="feed_title_null_placeholder"><i>Title missing</i></string>
+    <string name="feed_description_null_placeholder"><i>No description provided</i></string>
+    <string name="snackbar_feed_load_error">Error loading feed! Please try again.</string>
+    <string name="snackbar_network_error_message">Your internet connection may be down.</string>
+
+</resources>
