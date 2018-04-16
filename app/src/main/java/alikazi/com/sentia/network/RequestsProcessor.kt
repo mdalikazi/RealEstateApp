@@ -1,6 +1,5 @@
 package alikazi.com.sentia.network
 
-import alikazi.com.sentia.models.Properties
 import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
 import alikazi.com.sentia.utils.NetworkConstants

@@ -1,25 +1,11 @@
 package alikazi.com.sentia.models
 
-object Image {
-    var url: String? = null
-    var small: Small? = null
-    var medium: Medium? = null
-    var large: Large? = null
-    var profile: Profile? = null
+data class Image(var url: String) {
 
-    object Small {
-        var url: String? = null
-    }
+    var small: SpecificSizeUrl? = null
+    var medium: SpecificSizeUrl? = null
+    var large: SpecificSizeUrl? = null
+    var profile: SpecificSizeUrl? = null
 
-    object Medium {
-        var url: String? = null
-    }
-
-    object Large {
-        var url: String? = null
-    }
-
-    object Profile {
-        var url: String? = null
-    }
+    data class SpecificSizeUrl(var url: String)
 }

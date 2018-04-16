@@ -1,8 +1,7 @@
 package alikazi.com.sentia.models
 
-object Location {
+data class Location(var id: Int) {
 
-    var id: Int? = 0
     var address_1: String? = null
     var address_2: String? = null
     var suburb: String? = null
@@ -12,5 +11,4 @@ object Location {
     var latitude: Double? = 0.00
     var longitude: Double? = 0.00
     var full_address: String? = null
-
 }

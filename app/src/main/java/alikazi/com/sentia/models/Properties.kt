@@ -1,7 +1,3 @@
 package alikazi.com.sentia.models
 
-object Properties {
-
-    var data: ArrayList<Property>? = ArrayList()
-
-}
+data class Properties(var data: ArrayList<Property>)

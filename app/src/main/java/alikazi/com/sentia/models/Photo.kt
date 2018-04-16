@@ -1,8 +1,8 @@
 package alikazi.com.sentia.models
 
-object Photo {
+data class Photo(var id: Int) {
 
-    var id: Int? = 0
-    var default: Boolean? = false
     var image: Image? = null
+    var default: Boolean? = false
+
 }

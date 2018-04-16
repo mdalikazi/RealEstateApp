@@ -1,11 +1,10 @@
 package alikazi.com.sentia.models
 
-object Property {
+data class Property(var id: Int) {
 
-    var id: Int? = 0
+    var title: String? = null
     var is_premium: Boolean? = false
     var state: String? = null
-    var title: String? = null
     var bedrooms: Int? = 0
     var bathrooms: Int? = 0
     var carspots: Int? = 0
