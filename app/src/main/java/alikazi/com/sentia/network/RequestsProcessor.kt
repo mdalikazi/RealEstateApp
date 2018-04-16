@@ -1,5 +1,6 @@
 package alikazi.com.sentia.network
 
+import alikazi.com.sentia.models.Properties
 import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
 import alikazi.com.sentia.utils.NetworkConstants
@@ -17,7 +18,9 @@ import java.net.URL
  */
 class RequestsProcessor(context: Context, requestResponseListener: RequestResponseListener) {
 
-    private val LOG_TAG = AppConf.LOG_TAG_NETWORK
+    companion object {
+        private val LOG_TAG = AppConf.LOG_TAG_NETWORK
+    }
 
     private var mContext = context
     private var mRequestResponseListener = requestResponseListener
@@ -35,10 +38,9 @@ class RequestsProcessor(context: Context, requestResponseListener: RequestRespon
             val objectRequest = JsonObjectRequest(
                     Request.Method.GET, url, null,
                     Response.Listener { response ->
-                        DLog.d(LOG_TAG, "response: " + response.toString())
                         val gson = Gson()
-                        val properties: Properties = gson.fromJson(response.toString(), Properties.javaClass)
-                        DLog.d(LOG_TAG, "description: " + properties.data!![0].description)
+                        val properties: Properties = gson.fromJson(response.toString(), Properties::class.java)
+                        mRequestResponseListener.responseOk(properties)
                     },
                     Response.ErrorListener { error ->
                         mRequestResponseListener.responseError(error)
@@ -54,7 +56,7 @@ class RequestsProcessor(context: Context, requestResponseListener: RequestRespon
     }
 
     interface RequestResponseListener {
-        fun responseOk()
+        fun responseOk(properties: Properties)
 
         fun responseError(error: VolleyError)
     }

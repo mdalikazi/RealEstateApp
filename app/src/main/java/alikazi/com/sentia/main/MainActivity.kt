@@ -1,6 +1,7 @@
 package alikazi.com.sentia.main
 
 import alikazi.com.sentia.R
+import alikazi.com.sentia.models.Properties
 import alikazi.com.sentia.network.RequestQueueHelper
 import alikazi.com.sentia.network.RequestsProcessor
 import alikazi.com.sentia.utils.AnimationUtils
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity(),
 
     private var mRecyclerAdapter: RecyclerAdapter? = null
     private var mRequestsProcessor: RequestsProcessor? = null
-    private var mListItems: ArrayList<Any>? = null
+//    private var mListItems: ArrayList<Property>? = null
+    private var mListItems: Properties? = null
 
     private var mEmptyListTextView: TextView? = null
     private var mRecyclerView: RecyclerView? = null
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity(),
         DLog.i(LOG_TAG, "onCreate")
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
-        initToolbar()
         initUi()
 
         mRequestsProcessor = RequestsProcessor(this, this)
@@ -70,6 +71,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initUi() {
+        initToolbar()
         mSwipeRefreshLayout = findViewById(R.id.main_swipe_refresh_layout)
         mSwipeRefreshLayout!!.setOnRefreshListener { makeRequest() }
         mEmptyListTextView = findViewById(R.id.main_empty_list_text_view)
@@ -92,6 +94,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onToolbarAnimationEnd() {
+        DLog.i(LOG_TAG, "onToolbarAnimationEnd")
         makeRequest()
     }
 
@@ -110,14 +113,13 @@ class MainActivity : AppCompatActivity(),
 //        outState!!.putParcelable(SAVE_INSTANCE_KEY_FEED, mListItems)
     }
 
-    override fun responseOk() {
+    override fun responseOk(properties: Properties) {
         DLog.i(LOG_TAG, "responseOk")
         // TODO HANDLE RESPONSE
-//        if (feed != null) {
-//            mFeed = feed
-//            mToolbar!!.setTitle(feed!!.title)
-//            mRecyclerAdapter!!.setFeed(feed)
-//        }
+        if (properties != null) {
+            mListItems = properties
+            mRecyclerAdapter!!.setListItems(properties)
+        }
         mSwipeRefreshLayout!!.isRefreshing = false
         showHideEmptyListMessage(false)
     }
