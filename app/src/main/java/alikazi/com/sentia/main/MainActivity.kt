@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun handleOrientationChange() {
         val layoutParams = mToolbar!!.layoutParams
-        layoutParams.height = AnimationUtils.getDefaultActionBarHeightInPixels(this@MainActivity)
+        layoutParams.height = AnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
         // TODO SET LISTITEMS
 //        mRecyclerAdapter!!.setListItems(mListItems)
         mSwipeRefreshLayout!!.isRefreshing = false
