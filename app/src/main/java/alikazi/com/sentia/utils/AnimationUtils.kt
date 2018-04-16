@@ -16,8 +16,8 @@ class AnimationUtils {
         fun animateToolbar(context: Context, toolbar: Toolbar, listener: ToolbarAnimationListener) {
             DLog.i(AppConf.LOG_TAG_MAIN, "animateToolbar")
             val layoutParams = toolbar.layoutParams
-            val toolbarHeight = layoutParams.height
-            val valueAnimator = ValueAnimator.ofInt(toolbarHeight, getDefaultActionBarHeightInPixels(context))
+            val toolbarHeight: Float = layoutParams.height.toFloat()
+            val valueAnimator = ValueAnimator.ofFloat(toolbarHeight, getDefaultActionBarHeightInPixels(context))
             valueAnimator.duration = 400
             valueAnimator.startDelay = 500
             valueAnimator.interpolator = DecelerateInterpolator()
@@ -51,13 +51,13 @@ class AnimationUtils {
             valueAnimator.start()
         }
 
-        fun getDefaultActionBarHeightInPixels(context: Context): Int {
+        fun getDefaultActionBarHeightInPixels(context: Context): Float {
             DLog.i(AppConf.LOG_TAG_MAIN, "getDefaultActionBarHeightInPixels")
             val typedValue = TypedValue()
             val canGetValue = context.theme.resolveAttribute(android.R.attr.actionBarSize, typedValue, true)
             return if (canGetValue) {
-                TypedValue.complexToDimensionPixelSize(typedValue.data, context.resources.displayMetrics)
-            } else 0
+                TypedValue.complexToDimensionPixelSize(typedValue.data, context.resources.displayMetrics).toFloat()
+            } else 0f
         }
     }
 
