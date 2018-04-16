@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun makeRequest() {
         if (mRequestsProcessor != null) {
-            mRequestsProcessor!!.getJson()
+            mRequestsProcessor!!.getProperties()
             mSwipeRefreshLayout!!.isRefreshing = true
             mEmptyListTextView!!.setText(R.string.feed_empty_list_message)
         }

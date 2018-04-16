@@ -6,6 +6,13 @@ package alikazi.com.sentia.utils
 class NetworkConstants {
 
     companion object {
-        val SCHEME_HTTPS = "https"
+
+        const val SCHEME_HTTP = "http"
+        const val SCHEME_HTTPS = "https"
+
+//        http://demo0065087.mockable.io/test/properties
+        const val URL_AUTHORITY = "demo0065087.mockable.io"
+        const val URL_PATH_TEST = "test"
+        const val URL_PATH_PROPERTIES = "properties"
     }
 }

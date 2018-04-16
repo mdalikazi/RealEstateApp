@@ -1,5 +1,6 @@
 package alikazi.com.sentia.network
 
+import alikazi.com.sentia.models.Properties
 import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
 import alikazi.com.sentia.utils.NetworkConstants
@@ -22,18 +23,23 @@ class RequestsProcessor(context: Context, requestResponseListener: RequestRespon
     private var mContext = context
     private var mRequestResponseListener = requestResponseListener
 
-    fun getJson() {
+    fun getProperties() {
         try {
             val builder = Uri.Builder()
-                    .scheme(NetworkConstants.SCHEME_HTTPS)
+                    .scheme(NetworkConstants.SCHEME_HTTP)
+                    .authority(NetworkConstants.URL_AUTHORITY)
+                    .appendPath(NetworkConstants.URL_PATH_TEST)
+                    .appendPath(NetworkConstants.URL_PATH_PROPERTIES)
 
             val url = URL(builder.build().toString()).toString()
 
             val objectRequest = JsonObjectRequest(
                     Request.Method.GET, url, null,
                     Response.Listener { response ->
+                        DLog.d(LOG_TAG, "response: " + response.toString())
                         val gson = Gson()
-                        // TODO PROCESS RESPONSE
+                        val properties: Properties = gson.fromJson(response.toString(), Properties.javaClass)
+                        DLog.d(LOG_TAG, "description: " + properties.data!![0].description)
                     },
                     Response.ErrorListener { error ->
                         mRequestResponseListener.responseError(error)
