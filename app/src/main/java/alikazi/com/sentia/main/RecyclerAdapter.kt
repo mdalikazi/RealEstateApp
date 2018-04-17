@@ -2,9 +2,12 @@ package alikazi.com.sentia.main
 
 import alikazi.com.sentia.R
 import alikazi.com.sentia.models.Properties
+import alikazi.com.sentia.models.Property
 import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
+import alikazi.com.sentia.utils.SentiaViewUtils
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +15,17 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.TranslateAnimation
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 
 /**
  * Created by kazi_ on 15-Apr-18.
@@ -53,8 +66,37 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         val adapterPosition = holder.adapterPosition
         when (holder.itemViewType) {
             VIEW_TYPE_ITEM -> {
-                val propertyViewHolder: PropertyViewHolder = holder as PropertyViewHolder
-                propertyViewHolder.title.text = mListItems?.data?.get(adapterPosition)?.title
+                val viewHolder: PropertyViewHolder = holder as PropertyViewHolder
+                val property: Property? = mListItems?.data?.get(adapterPosition)
+
+                Glide.with(mContext)
+                        .load(property?.photo?.image?.url)
+                        .transition(DrawableTransitionOptions().crossFade())
+                        .apply(RequestOptions().encodeQuality(100))
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                                viewHolder.photoProgressBar.visibility = View.GONE
+                                return false
+                            }
+
+                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                                viewHolder.photoProgressBar.visibility = View.GONE
+                                return false
+                            }
+                        })
+                        .into(viewHolder.propertyPhoto)
+                viewHolder.title.text = property?.title
+                viewHolder.address.text = mContext.getString(R.string.property_address_combined,
+                        property?.location?.address_1,
+                        property?.location?.suburb,
+                        property?.location?.postcode)
+                viewHolder.ownerName.text = mContext.getString(R.string.property_owner_name_combined,
+                        property?.owner?.first_name,
+                        property?.owner?.last_name)
+                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.ownerAvatar)
+                viewHolder.propertyBedrooms.text = property?.bedrooms.toString()
+                viewHolder.propertyBathrooms.text = property?.bathrooms.toString()
+                viewHolder.propertyCarspots.text = property?.carspots.toString()
             }
         }
     }
@@ -93,8 +135,16 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
 
     private class PropertyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
+        var propertyPhoto: ImageView = itemView.findViewById(R.id.property_item_photo)
+        var photoProgressBar: ProgressBar = itemView.findViewById(R.id.property_item_progress_bar)
         var title: TextView = itemView.findViewById(R.id.property_item_title)
-
+        var address: TextView = itemView.findViewById(R.id.property_item_address)
+        var ownerAvatar: ImageView = itemView.findViewById(R.id.property_item_owner_avatar)
+        var ownerName: TextView = itemView.findViewById(R.id.property_item_owner_name)
+        var propertyBedrooms: TextView = itemView.findViewById(R.id.property_item_number_of_bedrooms)
+        var propertyBathrooms: TextView = itemView.findViewById(R.id.property_item_number_of_bathrooms)
+        var propertyCarspots: TextView = itemView.findViewById(R.id.property_item_number_of_carspots)
+        var follow: CheckBox = itemView.findViewById(R.id.property_item_heart_checkbox)
     }
 
 }

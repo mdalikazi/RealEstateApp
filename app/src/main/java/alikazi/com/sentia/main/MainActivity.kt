@@ -26,14 +26,13 @@ class MainActivity : AppCompatActivity(),
 
     companion object {
 
-        private val LOG_TAG = AppConf.LOG_TAG_MAIN
+        private const val LOG_TAG = AppConf.LOG_TAG_MAIN
 
-        private val SAVE_INSTANCE_KEY_FEED = "SAVE_INSTANCE_KEY_FEED"
+        private const val SAVE_INSTANCE_KEY_FEED = "SAVE_INSTANCE_KEY_FEED"
     }
 
     private var mRecyclerAdapter: RecyclerAdapter? = null
     private var mRequestsProcessor: RequestsProcessor? = null
-//    private var mListItems: ArrayList<Property>? = null
     private var mListItems: Properties? = null
 
     private var mEmptyListTextView: TextView? = null
@@ -44,12 +43,8 @@ class MainActivity : AppCompatActivity(),
     private val isNetworkConnected: Boolean
         get() {
             val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (connectivityManager != null) {
-                val networkInfo = connectivityManager.activeNetworkInfo
-                return networkInfo != null && networkInfo.isConnectedOrConnecting
-            }
-
-            return false
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnectedOrConnecting
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,8 +59,8 @@ class MainActivity : AppCompatActivity(),
             // Start from scratch
             AnimationUtils.animateToolbar(this, mToolbar!!, this)
         } else {
-            // TODO LOAD INSTANCE STATE
-//            mListItems = savedInstanceState.getParcelable<Feed>(SAVE_INSTANCE_KEY_FEED)
+//            mListItems = Properties(ArrayList())
+//            mListItems?.data = savedInstanceState.getSerializable(SAVE_INSTANCE_KEY_FEED) as ArrayList<Property>
             handleOrientationChange()
         }
     }
@@ -87,8 +82,6 @@ class MainActivity : AppCompatActivity(),
     private fun handleOrientationChange() {
         val layoutParams = mToolbar!!.layoutParams
         layoutParams.height = AnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
-        // TODO SET LISTITEMS
-//        mRecyclerAdapter!!.setListItems(mListItems)
         mSwipeRefreshLayout!!.isRefreshing = false
         showHideEmptyListMessage(false)
     }
@@ -109,17 +102,13 @@ class MainActivity : AppCompatActivity(),
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         DLog.i(LOG_TAG, "onSaveInstanceState")
-        // TODO SAVE INSTANCE STATE
-//        outState!!.putParcelable(SAVE_INSTANCE_KEY_FEED, mListItems)
+//        outState?.putSerializable(SAVE_INSTANCE_KEY_FEED, mListItems?.data)
     }
 
     override fun responseOk(properties: Properties) {
         DLog.i(LOG_TAG, "responseOk")
-        // TODO HANDLE RESPONSE
-        if (properties != null) {
-            mListItems = properties
-            mRecyclerAdapter!!.setListItems(properties)
-        }
+        mListItems = properties
+        mRecyclerAdapter!!.setListItems(properties)
         mSwipeRefreshLayout!!.isRefreshing = false
         showHideEmptyListMessage(false)
     }
