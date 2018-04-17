@@ -31,7 +31,7 @@
                 android:layout_centerInParent="true"/>
 
         </RelativeLayout>
-        
+
         <RelativeLayout
             android:id="@+id/property_item_title_container"
             android:layout_width="match_parent"
@@ -41,24 +41,29 @@
             android:layout_marginLeft="18dp"
             android:layout_marginEnd="18dp"
             android:layout_marginRight="18dp">
-            
+
             <TextView
                 style="@style/SentiaTextHeaderStyle"
-                android:id="@+id/property_item_business_name"
+                android:id="@+id/property_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
-                tools:text="Business Name"/>
+                android:maxEms="9"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="Property Title 2"/>
 
             <TextView
                 android:id="@+id/property_item_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/property_item_business_name"
+                android:layout_below="@+id/property_item_title"
                 android:layout_marginBottom="12dp"
                 android:textColor="@color/colorTextSecondary"
+                android:maxWidth="150dp"
                 android:maxLines="2"
-                tools:text="5 Parsons St\nLiverpool, 2168"/>
+                android:ellipsize="end"
+                tools:text="5 Parsons St \nLiverpool, 2168"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -76,34 +81,41 @@
                     tools:src="@mipmap/ic_launcher_round"/>
 
                 <TextView
+                    android:id="@+id/property_item_owner_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextSecondary"
                     android:textSize="12sp"
+                    android:maxEms="6"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     tools:text="Ali Kazi"/>
 
             </LinearLayout>
 
-
-
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/property_item_bed_bath_details_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/property_item_address"
-                >
+                android:gravity="center_vertical"
+                android:layout_below="@+id/property_item_address">
 
                 <TextView
                     android:id="@+id/property_item_number_of_bedrooms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:drawableEnd="@drawable/ic_location"
-                    android:drawableRight="@drawable/ic_location"
-                    android:drawableTint="@color/colorIconInactive"
                     android:textSize="16sp"
                     tools:text="1"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="6dp"
+                    android:scaleType="centerCrop"
+                    android:alpha="0.7"
+                    android:src="@drawable/bed"
+                    android:tint="@color/colorIconInactive"/>
 
                 <TextView
                     android:id="@+id/property_item_number_of_bathrooms"
@@ -111,41 +123,51 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/property_item_number_of_bedrooms"
                     android:layout_toEndOf="@+id/property_item_number_of_bedrooms"
-                    android:drawableEnd="@drawable/ic_location"
-                    android:drawableRight="@drawable/ic_location"
-                    android:drawableTint="@color/colorIconInactive"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
                     android:textSize="16sp"
                     tools:text="1"/>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="6dp"
+                    android:scaleType="centerCrop"
+                    android:alpha="0.7"
+                    android:src="@drawable/shower"
+                    android:tint="@color/colorIconInactive"/>
+
                 <TextView
-                    android:id="@+id/property_item_number_of_parking"
+                    android:id="@+id/property_item_number_of_carspots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/property_item_number_of_bathrooms"
                     android:layout_toEndOf="@+id/property_item_number_of_bathrooms"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
-                    android:drawableEnd="@drawable/ic_location"
-                    android:drawableRight="@drawable/ic_location"
-                    android:drawableTint="@color/colorIconInactive"
                     android:textSize="16sp"
                     tools:text="1"/>
 
-                <CheckBox
-                    android:id="@+id/property_item_heart_checkbox"
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:checked="false"
-                    android:button="@drawable/heart_checkbox"/>
+                    android:padding="6dp"
+                    android:scaleType="centerCrop"
+                    android:alpha="0.7"
+                    android:src="@drawable/sedan"
+                    android:tint="@color/colorIconInactive"/>
 
-            </RelativeLayout>
-            
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/property_item_heart_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignBottom="@+id/property_item_bed_bath_details_container"
+                android:checked="false"
+                android:button="@drawable/heart_checkbox"/>
+
         </RelativeLayout>
 
     </RelativeLayout>
