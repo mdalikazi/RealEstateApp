@@ -8,6 +8,11 @@
     <color name="colorTextSecondary">@android:color/tertiary_text_light</color>
     <color name="colorIconTint">#56000000</color>
     <color name="colorDivider">#EEEEEE</color>
+    <color name="colorTransparent">#00000000</color>
     <color name="colorWindowBackground">#E2E2E2</color>
+
+    <color name="colorIconInactive">#757575</color>
+    <color name="colorPin">#C62828</color>
+    <color name="colorFavorite">#E53935</color>
 
 </resources>

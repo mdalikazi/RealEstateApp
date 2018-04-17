@@ -26,14 +26,13 @@ class MainActivity : AppCompatActivity(),
 
     companion object {
 
-        private val LOG_TAG = AppConf.LOG_TAG_MAIN
+        private const val LOG_TAG = AppConf.LOG_TAG_MAIN
 
-        private val SAVE_INSTANCE_KEY_FEED = "SAVE_INSTANCE_KEY_FEED"
+        private const val SAVE_INSTANCE_KEY_FEED = "SAVE_INSTANCE_KEY_FEED"
     }
 
     private var mRecyclerAdapter: RecyclerAdapter? = null
     private var mRequestsProcessor: RequestsProcessor? = null
-//    private var mListItems: ArrayList<Property>? = null
     private var mListItems: Properties? = null
 
     private var mEmptyListTextView: TextView? = null

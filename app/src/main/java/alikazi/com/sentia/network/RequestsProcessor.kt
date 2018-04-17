@@ -19,7 +19,7 @@ import java.net.URL
 class RequestsProcessor(context: Context, requestResponseListener: RequestResponseListener) {
 
     companion object {
-        private val LOG_TAG = AppConf.LOG_TAG_NETWORK
+        private const val LOG_TAG = AppConf.LOG_TAG_NETWORK
     }
 
     private var mContext = context
