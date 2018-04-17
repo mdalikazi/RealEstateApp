@@ -5,6 +5,7 @@ import alikazi.com.sentia.models.Properties
 import alikazi.com.sentia.models.Property
 import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
+import alikazi.com.sentia.utils.SentiaViewUtils
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
@@ -90,11 +91,7 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
                         property?.location?.suburb + " " +
                         property?.location?.postcode
                 viewHolder.ownerName.text = property?.owner?.first_name + " " + property?.owner?.last_name
-                Glide.with(mContext)
-                        .load(property?.owner?.avatar?.url)
-                        .transition(DrawableTransitionOptions().crossFade())
-                        .apply(RequestOptions().circleCrop().placeholder(R.drawable.ic_account))
-                        .into(viewHolder.ownerAvatar)
+                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.ownerAvatar)
                 viewHolder.propertyBedrooms.text = property?.bedrooms.toString()
                 viewHolder.propertyBathrooms.text = property?.bathrooms.toString()
                 viewHolder.propertyCarspots.text = property?.carspots.toString()
