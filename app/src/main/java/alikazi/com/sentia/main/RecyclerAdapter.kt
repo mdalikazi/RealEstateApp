@@ -88,7 +88,6 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
                 viewHolder.address.text =
                         property?.location?.address_1 + "\n" +
                         property?.location?.suburb + " " +
-                        property?.location?.state + " " +
                         property?.location?.postcode
                 viewHolder.ownerName.text = property?.owner?.first_name + " " + property?.owner?.last_name
                 Glide.with(mContext)

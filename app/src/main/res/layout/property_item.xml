@@ -5,6 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="6dp"
+    android:layout_marginStart="6dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginEnd="6dp"
+    android:layout_marginTop="6dp"
     app:contentPadding="16dp"
     app:cardElevation="@dimen/cardview_default_elevation">
 
@@ -24,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/image_content_description_default"/>
 
             <ProgressBar
                 android:id="@+id/property_item_progress_bar"
@@ -80,6 +86,7 @@
                     android:id="@+id/property_item_owner_avatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:contentDescription="@string/image_content_description_default"
                     tools:src="@mipmap/ic_launcher_round"/>
 
                 <TextView
@@ -112,50 +119,46 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:padding="6dp"
                     android:scaleType="centerCrop"
                     android:alpha="0.7"
                     android:src="@drawable/bed"
-                    android:tint="@color/colorIconInactive"/>
+                    android:tint="@color/colorIconInactive"
+                    android:contentDescription="@string/image_content_description_default"/>
 
                 <TextView
                     android:id="@+id/property_item_number_of_bathrooms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/property_item_number_of_bedrooms"
-                    android:layout_toEndOf="@+id/property_item_number_of_bedrooms"
                     android:textSize="16sp"
                     tools:text="1"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:padding="6dp"
                     android:scaleType="centerCrop"
                     android:alpha="0.7"
                     android:src="@drawable/shower"
-                    android:tint="@color/colorIconInactive"/>
+                    android:tint="@color/colorIconInactive"
+                    android:contentDescription="@string/image_content_description_default"/>
 
                 <TextView
                     android:id="@+id/property_item_number_of_carspots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/property_item_number_of_bathrooms"
-                    android:layout_toEndOf="@+id/property_item_number_of_bathrooms"
                     android:textSize="16sp"
                     tools:text="1"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:padding="6dp"
                     android:scaleType="centerCrop"
                     android:alpha="0.7"
                     android:src="@drawable/sedan"
-                    android:tint="@color/colorIconInactive"/>
+                    android:tint="@color/colorIconInactive"
+                    android:contentDescription="@string/image_content_description_default"/>
 
             </LinearLayout>
 
