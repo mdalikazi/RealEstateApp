@@ -86,11 +86,13 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
                         })
                         .into(viewHolder.propertyPhoto)
                 viewHolder.title.text = property?.title
-                viewHolder.address.text =
-                        property?.location?.address_1 + "\n" +
-                        property?.location?.suburb + " " +
-                        property?.location?.postcode
-                viewHolder.ownerName.text = property?.owner?.first_name + " " + property?.owner?.last_name
+                viewHolder.address.text = mContext.getString(R.string.property_address_combined,
+                        property?.location?.address_1,
+                        property?.location?.suburb,
+                        property?.location?.postcode)
+                viewHolder.ownerName.text = mContext.getString(R.string.property_owner_name_combined,
+                        property?.owner?.first_name,
+                        property?.owner?.last_name)
                 SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.ownerAvatar)
                 viewHolder.propertyBedrooms.text = property?.bedrooms.toString()
                 viewHolder.propertyBathrooms.text = property?.bathrooms.toString()
@@ -143,7 +145,6 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         var propertyBathrooms: TextView = itemView.findViewById(R.id.property_item_number_of_bathrooms)
         var propertyCarspots: TextView = itemView.findViewById(R.id.property_item_number_of_carspots)
         var follow: CheckBox = itemView.findViewById(R.id.property_item_heart_checkbox)
-
     }
 
 }
