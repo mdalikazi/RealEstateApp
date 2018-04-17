@@ -28,8 +28,6 @@
     </style>
 
     <style name="SentiaBusinessIconStyle">
-        <item name="android:padding">6dp</item>
-        <item name="android:cropToPadding">true</item>
         <item name="android:foreground">@drawable/image_circular_border</item>
         <item name="android:contentDescription">@string/image_content_description_default</item>
     </style>

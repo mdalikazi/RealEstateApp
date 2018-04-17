@@ -2,11 +2,11 @@
 
     <string name="app_name">Sentia Test - Ali Kazi</string>
     <string name="refresh">Refresh</string>
-    <string name="feed_empty_list_message">Loading properties&#8230;</string>
+    <string name="feed_empty_list_message">Loading&#8230;</string>
     <string name="feed_empty_list_error_message">Something went wrong</string>
     <string name="feed_title_null_placeholder"><i>Title missing</i></string>
     <string name="feed_description_null_placeholder"><i>No description provided</i></string>
-    <string name="snackbar_feed_load_error">Error loading properties! Please try again.</string>
+    <string name="snackbar_feed_load_error">There was an error. Please try again.</string>
     <string name="snackbar_network_error_message">Your internet connection may be down.</string>
     <string name="image_content_description_default">Image</string>
 

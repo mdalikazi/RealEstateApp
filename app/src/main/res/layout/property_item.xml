@@ -14,15 +14,17 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/property_item_view_pager_container"
+            android:id="@+id/property_item_photo_container"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="12dp">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/property_item_view_pager"
+            <ImageView
+                android:id="@+id/property_item_photo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"/>
 
             <ProgressBar
                 android:id="@+id/property_item_progress_bar"
@@ -36,7 +38,7 @@
             android:id="@+id/property_item_title_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/property_item_view_pager_container"
+            android:layout_below="@+id/property_item_photo_container"
             android:layout_marginStart="18dp"
             android:layout_marginLeft="18dp"
             android:layout_marginEnd="18dp"
