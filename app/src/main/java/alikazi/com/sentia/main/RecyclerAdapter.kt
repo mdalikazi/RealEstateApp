@@ -21,6 +21,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
@@ -68,11 +69,10 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
             VIEW_TYPE_ITEM -> {
                 val viewHolder: PropertyViewHolder = holder as PropertyViewHolder
                 val property: Property? = mListItems?.data?.get(adapterPosition)
-
                 Glide.with(mContext)
                         .load(property?.photo?.image?.url)
                         .transition(DrawableTransitionOptions().crossFade())
-                        .apply(RequestOptions().encodeQuality(100))
+                        .apply(RequestOptions().encodeQuality(100).diskCacheStrategy(DiskCacheStrategy.ALL))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                                 viewHolder.photoProgressBar.visibility = View.GONE

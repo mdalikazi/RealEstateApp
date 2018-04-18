@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity(),
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
         initToolbar()
+        initUi()
 
         mRequestsProcessor = RequestsProcessor(this, this)
         if (savedInstanceState == null) {
@@ -66,11 +67,9 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initUi() {
-        mToolbar?.title = getString(R.string.toolbar_title_properties)
         mSwipeRefreshLayout = findViewById(R.id.main_swipe_refresh_layout)
         mSwipeRefreshLayout?.setOnRefreshListener { makeRequest() }
         mEmptyListTextView = findViewById(R.id.main_empty_list_text_view)
-        mEmptyListTextView?.text= getString(R.string.feed_empty_list_message)
 
         mRecyclerAdapter = RecyclerAdapter(this)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -91,7 +90,8 @@ class MainActivity : AppCompatActivity(),
 
     override fun onToolbarAnimationEnd() {
         DLog.i(LOG_TAG, "onToolbarAnimationEnd")
-        initUi()
+        mToolbar?.title = getString(R.string.toolbar_title_properties)
+        mEmptyListTextView?.text= getString(R.string.feed_empty_list_message)
         makeRequest()
     }
 
@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity(),
 
     private fun initToolbar() {
         mToolbar = findViewById(R.id.toolbar)
-        mToolbar?.title = ""
         setSupportActionBar(mToolbar)
     }
 }
