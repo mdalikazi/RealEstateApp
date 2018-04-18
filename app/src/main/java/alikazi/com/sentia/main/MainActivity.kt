@@ -56,11 +56,12 @@ class MainActivity : AppCompatActivity(),
 
         mRequestsProcessor = RequestsProcessor(this, this)
         if (savedInstanceState == null) {
+            DLog.i(LOG_TAG,"savedInstanceState == null")
             // Start from scratch
             AnimationUtils.animateToolbar(this, mToolbar!!, this)
         } else {
-//            mListItems = Properties(ArrayList())
-//            mListItems?.data = savedInstanceState.getSerializable(SAVE_INSTANCE_KEY_FEED) as ArrayList<Property>
+            mListItems = savedInstanceState.getParcelable(SAVE_INSTANCE_KEY_FEED)
+            DLog.d(LOG_TAG, "mListItems?.data?.size: " + mListItems?.data?.size)
             handleOrientationChange()
         }
     }
@@ -80,9 +81,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun handleOrientationChange() {
+        DLog.i(LOG_TAG, "handleOrientationChange")
         val layoutParams = mToolbar!!.layoutParams
         layoutParams.height = AnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
         mSwipeRefreshLayout!!.isRefreshing = false
+        mRecyclerAdapter!!.setListItems(mListItems!!)
         showHideEmptyListMessage(false)
     }
 
@@ -102,7 +105,7 @@ class MainActivity : AppCompatActivity(),
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         DLog.i(LOG_TAG, "onSaveInstanceState")
-//        outState?.putSerializable(SAVE_INSTANCE_KEY_FEED, mListItems?.data)
+        outState?.putParcelable(SAVE_INSTANCE_KEY_FEED, mListItems)
     }
 
     override fun responseOk(properties: Properties) {
