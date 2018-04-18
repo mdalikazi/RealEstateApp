@@ -13,42 +13,44 @@ import android.view.animation.DecelerateInterpolator
 class AnimationUtils {
 
     companion object {
-        fun animateToolbar(context: Context, toolbar: Toolbar, listener: ToolbarAnimationListener) {
+        fun animateToolbar(context: Context, toolbar: Toolbar?, listener: ToolbarAnimationListener?) {
             DLog.i(AppConf.LOG_TAG_MAIN, "animateToolbar")
-            val layoutParams = toolbar.layoutParams
-            val toolbarHeight: Float = layoutParams.height.toFloat()
-            val valueAnimator = ValueAnimator.ofFloat(toolbarHeight, getDefaultActionBarHeightInPixels(context))
-            valueAnimator.duration = 400
-            valueAnimator.startDelay = 500
-            valueAnimator.interpolator = DecelerateInterpolator()
-            valueAnimator.setTarget(toolbar)
-            valueAnimator.addUpdateListener { valueAnimator ->
-                val lp = toolbar.layoutParams
-                val animatedHeight = valueAnimator.animatedValue
-                if (animatedHeight is Float) {
-                    lp.height = animatedHeight.toInt()
+            if (toolbar != null) {
+                val layoutParams = toolbar.layoutParams
+                val toolbarHeight: Float = layoutParams.height.toFloat()
+                val animator: ValueAnimator = ValueAnimator.ofFloat(toolbarHeight, getDefaultActionBarHeightInPixels(context))
+                animator.duration = 400
+                animator.startDelay = 500
+                animator.interpolator = DecelerateInterpolator()
+                animator.setTarget(toolbar)
+                animator.addUpdateListener { valueAnimator ->
+                    val lp = toolbar.layoutParams
+                    val animatedHeight = valueAnimator.animatedValue
+                    if (animatedHeight is Float) {
+                        lp.height = animatedHeight.toInt()
+                    }
+                    toolbar.layoutParams = lp
                 }
-                toolbar.layoutParams = lp
+
+                animator.addListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animator: Animator) {
+
+                    }
+
+                    override fun onAnimationEnd(animator: Animator) {
+                        listener?.onToolbarAnimationEnd()
+                    }
+
+                    override fun onAnimationCancel(animator: Animator) {
+
+                    }
+
+                    override fun onAnimationRepeat(animator: Animator) {
+
+                    }
+                })
+                animator.start()
             }
-
-            valueAnimator.addListener(object : Animator.AnimatorListener {
-                override fun onAnimationStart(animator: Animator) {
-
-                }
-
-                override fun onAnimationEnd(animator: Animator) {
-                    listener.onToolbarAnimationEnd()
-                }
-
-                override fun onAnimationCancel(animator: Animator) {
-
-                }
-
-                override fun onAnimationRepeat(animator: Animator) {
-
-                }
-            })
-            valueAnimator.start()
         }
 
         fun getDefaultActionBarHeightInPixels(context: Context): Float {

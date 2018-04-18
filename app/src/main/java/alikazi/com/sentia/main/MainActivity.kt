@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(),
         DLog.i(LOG_TAG, "onCreate")
         setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
-        initUi()
+        initToolbar()
 
         mRequestsProcessor = RequestsProcessor(this, this)
         if (savedInstanceState == null) {
@@ -67,38 +67,40 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun initUi() {
-        initToolbar()
+        mToolbar?.title = getString(R.string.toolbar_title_properties)
         mSwipeRefreshLayout = findViewById(R.id.main_swipe_refresh_layout)
-        mSwipeRefreshLayout!!.setOnRefreshListener { makeRequest() }
+        mSwipeRefreshLayout?.setOnRefreshListener { makeRequest() }
         mEmptyListTextView = findViewById(R.id.main_empty_list_text_view)
+        mEmptyListTextView?.text= getString(R.string.feed_empty_list_message)
 
         mRecyclerAdapter = RecyclerAdapter(this)
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         mRecyclerView = findViewById(R.id.main_recycler_view)
-        mRecyclerView!!.layoutManager = layoutManager
-        mRecyclerView!!.adapter = mRecyclerAdapter
+        mRecyclerView?.layoutManager = layoutManager
+        mRecyclerView?.adapter = mRecyclerAdapter
         showHideEmptyListMessage(true)
     }
 
     private fun handleOrientationChange() {
         DLog.i(LOG_TAG, "handleOrientationChange")
-        val layoutParams = mToolbar!!.layoutParams
-        layoutParams.height = AnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
-        mSwipeRefreshLayout!!.isRefreshing = false
-        mRecyclerAdapter!!.setListItems(mListItems!!)
+        val layoutParams = mToolbar?.layoutParams
+        layoutParams?.height = AnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
+        mSwipeRefreshLayout?.isRefreshing = false
+        mRecyclerAdapter?.setListItems(mListItems)
         showHideEmptyListMessage(false)
     }
 
     override fun onToolbarAnimationEnd() {
         DLog.i(LOG_TAG, "onToolbarAnimationEnd")
+        initUi()
         makeRequest()
     }
 
     private fun makeRequest() {
         if (mRequestsProcessor != null) {
-            mRequestsProcessor!!.getProperties()
-            mSwipeRefreshLayout!!.isRefreshing = true
-            mEmptyListTextView!!.setText(R.string.feed_empty_list_message)
+            mRequestsProcessor?.getProperties()
+            mSwipeRefreshLayout?.isRefreshing = true
+            mEmptyListTextView?.setText(R.string.feed_empty_list_message)
         }
     }
 
@@ -111,14 +113,14 @@ class MainActivity : AppCompatActivity(),
     override fun responseOk(properties: Properties) {
         DLog.i(LOG_TAG, "responseOk")
         mListItems = properties
-        mRecyclerAdapter!!.setListItems(properties)
-        mSwipeRefreshLayout!!.isRefreshing = false
+        mRecyclerAdapter?.setListItems(properties)
+        mSwipeRefreshLayout?.isRefreshing = false
         showHideEmptyListMessage(false)
     }
 
     override fun responseError(error: VolleyError) {
         DLog.i(LOG_TAG, "responseError: " + error.toString())
-        mEmptyListTextView!!.setText(R.string.feed_empty_list_error_message)
+        mEmptyListTextView?.setText(R.string.feed_empty_list_error_message)
         val snackbarMessage = if (isNetworkConnected)
             getString(R.string.snackbar_feed_load_error)
         else
@@ -128,12 +130,12 @@ class MainActivity : AppCompatActivity(),
                 .show()
 
         showHideEmptyListMessage(true)
-        mSwipeRefreshLayout!!.isRefreshing = false
+        mSwipeRefreshLayout?.isRefreshing = false
     }
 
     private fun showHideEmptyListMessage(showMessage: Boolean) {
-        mEmptyListTextView!!.visibility = if (showMessage) View.VISIBLE else View.GONE
-        mRecyclerView!!.visibility = if (showMessage) View.GONE else View.VISIBLE
+        mEmptyListTextView?.visibility = if (showMessage) View.VISIBLE else View.GONE
+        mRecyclerView?.visibility = if (showMessage) View.GONE else View.VISIBLE
     }
 
     override fun onStop() {

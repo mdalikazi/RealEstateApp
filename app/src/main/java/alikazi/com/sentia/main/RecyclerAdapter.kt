@@ -41,7 +41,7 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
     private var mAnimate: Boolean = false
     private var mListItems: Properties? = null
 
-    fun setListItems(listItems: Properties) {
+    fun setListItems(listItems: Properties?) {
         DLog.i(LOG_TAG, "setListItems")
         mListItems?.data?.clear()
         notifyDataSetChanged()
@@ -101,12 +101,9 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         }
     }
 
-    override fun getItemCount(): Int {
-        if (mListItems != null) {
-           return mListItems!!.data.size
-        }
-
-        return 0
+    override fun getItemCount(): Int = when(mListItems) {
+        null -> 0
+        else -> mListItems!!.data?.size
     }
 
     private fun animateList(view: View) {
