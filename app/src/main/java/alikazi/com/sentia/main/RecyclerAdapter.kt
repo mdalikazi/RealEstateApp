@@ -115,7 +115,7 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         translateAnimation.duration = 500
         translateAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationStart(animation: Animation) {
-
+                view.animate().alpha(1f).duration = 250
             }
 
             override fun onAnimationEnd(animation: Animation) {
@@ -127,6 +127,7 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
 
             }
         })
+        view.alpha = 0f
         view.startAnimation(translateAnimation)
     }
 

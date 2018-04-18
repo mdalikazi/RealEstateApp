@@ -61,7 +61,6 @@ class MainActivity : AppCompatActivity(),
             AnimationUtils.animateToolbar(this, mToolbar!!, this)
         } else {
             mListItems = savedInstanceState.getParcelable(SAVE_INSTANCE_KEY_FEED)
-            DLog.d(LOG_TAG, "mListItems?.data?.size: " + mListItems?.data?.size)
             handleOrientationChange()
         }
     }
@@ -145,6 +144,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun initToolbar() {
         mToolbar = findViewById(R.id.toolbar)
+        mToolbar?.title = ""
         setSupportActionBar(mToolbar)
     }
 }
