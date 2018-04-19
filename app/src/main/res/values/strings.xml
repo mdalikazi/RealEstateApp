@@ -11,7 +11,9 @@
     <string name="image_content_description_default">Image</string>
     <string name="toolbar_title_properties">Properties</string>
     <string name="property_detail_empty_message">Select a property to see details</string>
-
+    <string name="property_detail_address_label">Address: </string>
+    <string name="property_detail_description_label">Description: </string>
+    <string name="property_detail_price_label">Price: </string>
     <string name="property_address_combined">%1$s \n%2$s %3$s</string>
     <string name="property_owner_name_combined">%1$s %2$s</string>
 

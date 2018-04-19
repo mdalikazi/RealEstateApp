@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.property_detail.view.*
+import java.text.NumberFormat
 
 class DetailsFragment : Fragment() {
 
@@ -33,7 +34,14 @@ class DetailsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         DLog.i(LOG_TAG, "onCreateView")
         val view = inflater.inflate(R.layout.property_detail, container, false)
-        view.property_detail_text_view.text = mProperty?.title.toString()
+        view.property_detail_empty_message.visibility = if (mProperty == null) View.VISIBLE else View.GONE
+        view.property_detail_title.text = mProperty?.title
+        view.property_detail_address.text = getString(R.string.property_address_combined,
+                        mProperty?.location?.address_1,
+                        mProperty?.location?.suburb,
+                        mProperty?.location?.postcode)
+        view.property_detail_description.text = mProperty?.description
+        view.property_detail_price.text = NumberFormat.getCurrencyInstance().format(mProperty?.price)
         return view
     }
 }
