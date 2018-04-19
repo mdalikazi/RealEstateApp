@@ -106,12 +106,54 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
                 viewHolder.premiumPropertyBathrooms.text = property?.bathrooms.toString()
                 viewHolder.premiumPropertyCarspots.text = property?.carspots.toString()
             }
+
+            VIEW_TYPE_BASIC -> {
+                val viewHolder: BasicropertyViewHolder = holder as BasicropertyViewHolder
+                val property: Property? = mListItems?.data?.get(adapterPosition)
+                Glide.with(mContext)
+                        .load(property?.photo?.image?.url)
+                        .transition(DrawableTransitionOptions().crossFade())
+                        .apply(RequestOptions().encodeQuality(100).diskCacheStrategy(DiskCacheStrategy.ALL))
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                                viewHolder.basicPhotoProgressBar.visibility = View.GONE
+                                return false
+                            }
+
+                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                                viewHolder.basicPhotoProgressBar.visibility = View.GONE
+                                return false
+                            }
+                        })
+                        .into(viewHolder.basicPropertyPhoto)
+                viewHolder.basicTitle.text = property?.title
+                viewHolder.basicAddress.text = mContext.getString(R.string.property_address_combined,
+                        property?.location?.address_1,
+                        property?.location?.suburb,
+                        property?.location?.postcode)
+                viewHolder.basicOwnerName.text = mContext.getString(R.string.property_owner_name_combined,
+                        property?.owner?.first_name,
+                        property?.owner?.last_name)
+                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.basicOwnerAvatar)
+                viewHolder.basicPropertyBedrooms.text = property?.bedrooms.toString()
+                viewHolder.basicPropertyBathrooms.text = property?.bathrooms.toString()
+                viewHolder.basicPropertyCarspots.text = property?.carspots.toString()
+            }
         }
     }
 
     override fun getItemCount(): Int = when(mListItems) {
         null -> 0
         else -> mListItems!!.data?.size
+    }
+
+    override fun getItemViewType(position: Int): Int = when(mListItems) {
+        null -> super.getItemViewType(position)
+        else -> when (mListItems?.data?.get(position)?.is_premium) {
+            true -> VIEW_TYPE_PREMIUM
+            false -> VIEW_TYPE_BASIC
+            else -> super.getItemViewType(position)
+        }
     }
 
     private fun animateList(view: View) {

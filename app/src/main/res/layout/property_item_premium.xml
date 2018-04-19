@@ -73,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
@@ -170,11 +171,17 @@
             android:checked="false"
             android:button="@drawable/heart_checkbox"/>
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/property_item_premium_title_container"
-            android:background="@color/colorPremium"/>
+            android:background="@color/colorPremium"
+            android:text="Premium"
+            android:textColor="@color/colorWhite"
+            android:textSize="16dp"
+            android:gravity="end|right"
+            android:paddingEnd="12dp"
+            android:paddingRight="12dp"/>
 
     </RelativeLayout>
 
