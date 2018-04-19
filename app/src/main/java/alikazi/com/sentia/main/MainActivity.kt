@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(),
             }
             supportFragmentManager
                     .beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.property_detail_container, fragment)
                     .commit()
         }
