@@ -19,7 +19,7 @@
 
         <RelativeLayout
             android:id="@+id/property_item_basic_photo_container"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="120dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true">
@@ -135,8 +135,6 @@
                     android:tint="@color/colorIconInactive"/>
 
             </LinearLayout>
-
-            <!--android:layout_alignTop="@+id/property_item_basic_bed_bath_details_container"-->
 
         </RelativeLayout>
 
