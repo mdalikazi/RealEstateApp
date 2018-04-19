@@ -5,27 +5,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="6dp"
-    android:layout_marginStart="6dp"
-    android:layout_marginRight="6dp"
-    android:layout_marginEnd="6dp"
-    android:layout_marginTop="6dp"
-    app:contentPadding="16dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
     app:cardElevation="@dimen/cardview_default_elevation">
 
     <RelativeLayout
-        android:id="@+id/property_item_container"
+        android:id="@+id/property_item_premium_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/property_item_photo_container"
+            android:id="@+id/property_item_premium_photo_container"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="12dp">
+            android:layout_height="200dp">
 
             <ImageView
-                android:id="@+id/property_item_photo"
+                android:id="@+id/property_item_premium_photo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -33,7 +31,7 @@
                 android:contentDescription="@string/image_content_description_default"/>
 
             <ProgressBar
-                android:id="@+id/property_item_progress_bar"
+                android:id="@+id/property_item_premium_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"/>
@@ -41,31 +39,28 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/property_item_title_container"
+            android:id="@+id/property_item_premium_title_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/property_item_photo_container"
-            android:layout_marginStart="18dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginEnd="18dp"
-            android:layout_marginRight="18dp">
+            android:layout_below="@+id/property_item_premium_photo_container"
+            android:layout_margin="18dp">
 
             <TextView
                 style="@style/SentiaTextHeaderStyle"
-                android:id="@+id/property_item_title"
+                android:id="@+id/property_item_premium_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
                 android:maxEms="9"
                 android:maxLines="1"
                 android:ellipsize="end"
-                tools:text="Property Title 2"/>
+                tools:text="Property Title"/>
 
             <TextView
-                android:id="@+id/property_item_address"
+                android:id="@+id/property_item_premium_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/property_item_title"
+                android:layout_below="@+id/property_item_premium_title"
                 android:layout_marginBottom="12dp"
                 android:textColor="@color/colorTextSecondary"
                 android:maxWidth="150dp"
@@ -78,19 +73,20 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
                 <ImageView
                     style="@style/SentiaBusinessIconStyle"
-                    android:id="@+id/property_item_owner_avatar"
+                    android:id="@+id/property_item_premium_owner_avatar"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:contentDescription="@string/image_content_description_default"
                     tools:src="@mipmap/ic_launcher_round"/>
 
                 <TextView
-                    android:id="@+id/property_item_owner_name"
+                    android:id="@+id/property_item_premium_owner_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorTextSecondary"
@@ -103,14 +99,14 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/property_item_bed_bath_details_container"
+                android:id="@+id/property_item_premium_bed_bath_details_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:layout_below="@+id/property_item_address">
+                android:layout_below="@+id/property_item_premium_address">
 
                 <TextView
-                    android:id="@+id/property_item_number_of_bedrooms"
+                    android:id="@+id/property_item_premium_number_of_bedrooms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -127,7 +123,7 @@
                     android:contentDescription="@string/image_content_description_default"/>
 
                 <TextView
-                    android:id="@+id/property_item_number_of_bathrooms"
+                    android:id="@+id/property_item_premium_number_of_bathrooms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -144,7 +140,7 @@
                     android:contentDescription="@string/image_content_description_default"/>
 
                 <TextView
-                    android:id="@+id/property_item_number_of_carspots"
+                    android:id="@+id/property_item_premium_number_of_carspots"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
@@ -162,18 +158,30 @@
 
             </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/property_item_heart_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignBottom="@+id/property_item_bed_bath_details_container"
-                android:checked="false"
-                android:button="@drawable/heart_checkbox"/>
-
         </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/property_item_premium_heart_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:checked="false"
+            android:button="@drawable/heart_checkbox"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/property_item_premium_title_container"
+            android:background="@color/colorPremium"
+            android:text="Premium"
+            android:textColor="@color/colorWhite"
+            android:textSize="16dp"
+            android:gravity="end|right"
+            android:paddingEnd="12dp"
+            android:paddingRight="12dp"/>
 
     </RelativeLayout>
 
