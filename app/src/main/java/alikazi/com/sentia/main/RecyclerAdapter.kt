@@ -35,7 +35,8 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
 
     companion object {
         private const val LOG_TAG = AppConf.LOG_TAG_MAIN
-        private const val VIEW_TYPE_ITEM = 0
+        private const val VIEW_TYPE_BASIC = 0
+        private const val VIEW_TYPE_PREMIUM = 1
     }
 
     private var mContext = context
@@ -54,10 +55,17 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
         when (viewType) {
-            VIEW_TYPE_ITEM -> {
-                view = LayoutInflater.from(mContext).inflate(R.layout.property_item, parent, false)
-                return PropertyViewHolder(view)
+
+            VIEW_TYPE_BASIC -> {
+                view = LayoutInflater.from(mContext).inflate(R.layout.property_item_basic, parent, false)
+                return BasicropertyViewHolder(view)
             }
+
+            VIEW_TYPE_PREMIUM -> {
+                view = LayoutInflater.from(mContext).inflate(R.layout.property_item_premium, parent, false)
+                return PremiumPropertyViewHolder(view)
+            }
+
             else -> throw RuntimeException("There are invalid views inside RecyclerAdapter!")
         }
     }
@@ -66,8 +74,8 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         animateList(holder.itemView)
         val adapterPosition = holder.adapterPosition
         when (holder.itemViewType) {
-            VIEW_TYPE_ITEM -> {
-                val viewHolder: PropertyViewHolder = holder as PropertyViewHolder
+            VIEW_TYPE_PREMIUM -> {
+                val viewHolder: PremiumPropertyViewHolder = holder as PremiumPropertyViewHolder
                 val property: Property? = mListItems?.data?.get(adapterPosition)
                 Glide.with(mContext)
                         .load(property?.photo?.image?.url)
@@ -75,28 +83,28 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
                         .apply(RequestOptions().encodeQuality(100).diskCacheStrategy(DiskCacheStrategy.ALL))
                         .listener(object : RequestListener<Drawable> {
                             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                                viewHolder.photoProgressBar.visibility = View.GONE
+                                viewHolder.premiumPhotoProgressBar.visibility = View.GONE
                                 return false
                             }
 
                             override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                viewHolder.photoProgressBar.visibility = View.GONE
+                                viewHolder.premiumPhotoProgressBar.visibility = View.GONE
                                 return false
                             }
                         })
-                        .into(viewHolder.propertyPhoto)
-                viewHolder.title.text = property?.title
-                viewHolder.address.text = mContext.getString(R.string.property_address_combined,
+                        .into(viewHolder.premiumPropertyPhoto)
+                viewHolder.premiumTitle.text = property?.title
+                viewHolder.premiumAddress.text = mContext.getString(R.string.property_address_combined,
                         property?.location?.address_1,
                         property?.location?.suburb,
                         property?.location?.postcode)
-                viewHolder.ownerName.text = mContext.getString(R.string.property_owner_name_combined,
+                viewHolder.premiumOwnerName.text = mContext.getString(R.string.property_owner_name_combined,
                         property?.owner?.first_name,
                         property?.owner?.last_name)
-                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.ownerAvatar)
-                viewHolder.propertyBedrooms.text = property?.bedrooms.toString()
-                viewHolder.propertyBathrooms.text = property?.bathrooms.toString()
-                viewHolder.propertyCarspots.text = property?.carspots.toString()
+                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.premiumOwnerAvatar)
+                viewHolder.premiumPropertyBedrooms.text = property?.bedrooms.toString()
+                viewHolder.premiumPropertyBathrooms.text = property?.bathrooms.toString()
+                viewHolder.premiumPropertyCarspots.text = property?.carspots.toString()
             }
         }
     }
@@ -131,18 +139,30 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         view.startAnimation(translateAnimation)
     }
 
-    private class PropertyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    private class PremiumPropertyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var premiumPropertyPhoto: ImageView = itemView.findViewById(R.id.property_item_premium_photo)
+        var premiumPhotoProgressBar: ProgressBar = itemView.findViewById(R.id.property_item_premium_progress_bar)
+        var premiumTitle: TextView = itemView.findViewById(R.id.property_item_premium_title)
+        var premiumAddress: TextView = itemView.findViewById(R.id.property_item_premium_address)
+        var premiumOwnerAvatar: ImageView = itemView.findViewById(R.id.property_item_premium_owner_avatar)
+        var premiumOwnerName: TextView = itemView.findViewById(R.id.property_item_premium_owner_name)
+        var premiumPropertyBedrooms: TextView = itemView.findViewById(R.id.property_item_premium_number_of_bedrooms)
+        var premiumPropertyBathrooms: TextView = itemView.findViewById(R.id.property_item_premium_number_of_bathrooms)
+        var premiumPropertyCarspots: TextView = itemView.findViewById(R.id.property_item_premium_number_of_carspots)
+        var premiumFollow: CheckBox = itemView.findViewById(R.id.property_item_premium_heart_checkbox)
+    }
 
-        var propertyPhoto: ImageView = itemView.findViewById(R.id.property_item_photo)
-        var photoProgressBar: ProgressBar = itemView.findViewById(R.id.property_item_progress_bar)
-        var title: TextView = itemView.findViewById(R.id.property_item_title)
-        var address: TextView = itemView.findViewById(R.id.property_item_address)
-        var ownerAvatar: ImageView = itemView.findViewById(R.id.property_item_owner_avatar)
-        var ownerName: TextView = itemView.findViewById(R.id.property_item_owner_name)
-        var propertyBedrooms: TextView = itemView.findViewById(R.id.property_item_number_of_bedrooms)
-        var propertyBathrooms: TextView = itemView.findViewById(R.id.property_item_number_of_bathrooms)
-        var propertyCarspots: TextView = itemView.findViewById(R.id.property_item_number_of_carspots)
-        var follow: CheckBox = itemView.findViewById(R.id.property_item_heart_checkbox)
+    private class BasicropertyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        var basicPropertyPhoto: ImageView = itemView.findViewById(R.id.property_item_basic_photo)
+        var basicPhotoProgressBar: ProgressBar = itemView.findViewById(R.id.property_item_basic_progress_bar)
+        var basicTitle: TextView = itemView.findViewById(R.id.property_item_basic_title)
+        var basicAddress: TextView = itemView.findViewById(R.id.property_item_basic_address)
+        var basicOwnerAvatar: ImageView = itemView.findViewById(R.id.property_item_basic_owner_avatar)
+        var basicOwnerName: TextView = itemView.findViewById(R.id.property_item_basic_owner_name)
+        var basicPropertyBedrooms: TextView = itemView.findViewById(R.id.property_item_basic_number_of_bedrooms)
+        var basicPropertyBathrooms: TextView = itemView.findViewById(R.id.property_item_basic_number_of_bathrooms)
+        var basicPropertyCarspots: TextView = itemView.findViewById(R.id.property_item_basic_number_of_carspots)
+        var basicFollow: CheckBox = itemView.findViewById(R.id.property_item_basic_heart_checkbox)
     }
 
 }
