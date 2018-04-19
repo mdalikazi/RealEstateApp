@@ -31,7 +31,7 @@ import com.bumptech.glide.request.target.Target
 /**
  * Created by kazi_ on 15-Apr-18.
  */
-class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RecyclerAdapter(context: Context, itemClickListener: RecyclerItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val LOG_TAG = AppConf.LOG_TAG_MAIN
@@ -42,6 +42,7 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
     private var mContext = context
     private var mAnimate: Boolean = false
     private var mListItems: Properties? = null
+    private var mItemClickListener = itemClickListener
 
     fun setListItems(listItems: Properties?) {
         DLog.i(LOG_TAG, "setListItems")
@@ -55,17 +56,14 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
         when (viewType) {
-
             VIEW_TYPE_BASIC -> {
                 view = LayoutInflater.from(mContext).inflate(R.layout.property_item_basic, parent, false)
                 return BasicropertyViewHolder(view)
             }
-
             VIEW_TYPE_PREMIUM -> {
                 view = LayoutInflater.from(mContext).inflate(R.layout.property_item_premium, parent, false)
                 return PremiumPropertyViewHolder(view)
             }
-
             else -> throw RuntimeException("There are invalid views inside RecyclerAdapter!")
         }
     }
@@ -73,10 +71,12 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         animateList(holder.itemView)
         val adapterPosition = holder.adapterPosition
+        val property: Property? = mListItems?.data?.get(adapterPosition)
+        holder.itemView.setOnClickListener({ mItemClickListener.onPropertyItemClick(property)})
+
         when (holder.itemViewType) {
             VIEW_TYPE_PREMIUM -> {
                 val viewHolder: PremiumPropertyViewHolder = holder as PremiumPropertyViewHolder
-                val property: Property? = mListItems?.data?.get(adapterPosition)
                 Glide.with(mContext)
                         .load(property?.photo?.image?.url)
                         .transition(DrawableTransitionOptions().crossFade())
@@ -109,7 +109,6 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
 
             VIEW_TYPE_BASIC -> {
                 val viewHolder: BasicropertyViewHolder = holder as BasicropertyViewHolder
-                val property: Property? = mListItems?.data?.get(adapterPosition)
                 Glide.with(mContext)
                         .load(property?.photo?.image?.url)
                         .transition(DrawableTransitionOptions().crossFade())
@@ -144,7 +143,7 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
 
     override fun getItemCount(): Int = when(mListItems) {
         null -> 0
-        else -> mListItems!!.data?.size
+        else -> mListItems!!.data.size
     }
 
     override fun getItemViewType(position: Int): Int = when(mListItems) {
@@ -205,6 +204,10 @@ class RecyclerAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.View
         var basicPropertyBathrooms: TextView = itemView.findViewById(R.id.property_item_basic_number_of_bathrooms)
         var basicPropertyCarspots: TextView = itemView.findViewById(R.id.property_item_basic_number_of_carspots)
         var basicFollow: CheckBox = itemView.findViewById(R.id.property_item_basic_heart_checkbox)
+    }
+
+    interface RecyclerItemClickListener {
+        fun onPropertyItemClick(property: Property?)
     }
 
 }
