@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.property_detail.view.*
-import java.text.NumberFormat
 
 class DetailsFragment : Fragment() {
 
@@ -27,6 +26,7 @@ class DetailsFragment : Fragment() {
         arguments?.let {
             if (it.containsKey(INTENT_EXTRA_PROPERTY)) {
                 mProperty = it.getParcelable(INTENT_EXTRA_PROPERTY)
+                DLog.d(LOG_TAG, "mProperty != null")
             }
         }
     }
@@ -41,7 +41,11 @@ class DetailsFragment : Fragment() {
                         mProperty?.location?.suburb,
                         mProperty?.location?.postcode)
         view.property_detail_description.text = mProperty?.description
-        view.property_detail_price.text = NumberFormat.getCurrencyInstance().format(mProperty?.price)
+        /*try {
+            property_detail_price.text = NumberFormat.getCurrencyInstance().format(mProperty?.price)
+        } catch (e: Exception) {
+            property_detail_price.text = ""
+        }*/
         return view
     }
 }
