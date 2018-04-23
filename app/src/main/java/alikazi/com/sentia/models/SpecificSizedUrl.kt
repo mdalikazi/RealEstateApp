@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Properties(var data: ArrayList<Property>) : Parcelable
+data class SpecificSizeUrl(var url: String) : Parcelable
