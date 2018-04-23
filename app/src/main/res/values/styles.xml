@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -25,6 +25,23 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="SentiaBusinessIconStyle">
+        <item name="android:foreground">@drawable/image_circular_border</item>
+        <item name="android:contentDescription">@string/image_content_description_default</item>
+    </style>
+
+    <style name="SentiaTextHeaderStyle" parent="@android:style/TextAppearance.Large">
+    </style>
+
+    <style name="SentiaTextSecondaryHeaderStyle" parent="@android:style/TextAppearance.Large">
+        <item name="android:textStyle">bold|italic</item>
+    </style>
+
+    <style name="SentiaSecondaryText">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>

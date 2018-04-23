@@ -1,5 +1,6 @@
 package alikazi.com.sentia.network
 
+import alikazi.com.sentia.models.Properties
 import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
 import alikazi.com.sentia.utils.NetworkConstants
@@ -17,15 +18,20 @@ import java.net.URL
  */
 class RequestsProcessor(context: Context, requestResponseListener: RequestResponseListener) {
 
-    private val LOG_TAG = AppConf.LOG_TAG_NETWORK
+    companion object {
+        private const val LOG_TAG = AppConf.LOG_TAG_NETWORK
+    }
 
     private var mContext = context
     private var mRequestResponseListener = requestResponseListener
 
-    fun getJson() {
+    fun getProperties() {
         try {
             val builder = Uri.Builder()
-                    .scheme(NetworkConstants.SCHEME_HTTPS)
+                    .scheme(NetworkConstants.SCHEME_HTTP)
+                    .authority(NetworkConstants.URL_AUTHORITY)
+                    .appendPath(NetworkConstants.URL_PATH_TEST)
+                    .appendPath(NetworkConstants.URL_PATH_PROPERTIES)
 
             val url = URL(builder.build().toString()).toString()
 
@@ -33,7 +39,8 @@ class RequestsProcessor(context: Context, requestResponseListener: RequestRespon
                     Request.Method.GET, url, null,
                     Response.Listener { response ->
                         val gson = Gson()
-                        // TODO PROCESS RESPONSE
+                        val properties: Properties = gson.fromJson(response.toString(), Properties::class.java)
+                        mRequestResponseListener.responseOk(properties)
                     },
                     Response.ErrorListener { error ->
                         mRequestResponseListener.responseError(error)
@@ -49,7 +56,7 @@ class RequestsProcessor(context: Context, requestResponseListener: RequestRespon
     }
 
     interface RequestResponseListener {
-        fun responseOk()
+        fun responseOk(properties: Properties)
 
         fun responseError(error: VolleyError)
     }
