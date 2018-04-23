@@ -79,6 +79,9 @@ class MainActivity : AppCompatActivity(),
 
     override fun onPropertyItemClick(property: Property?) {
         DLog.i(LOG_TAG, "onPropertyItemClick")
+        DLog.i(LOG_TAG, "property?.title " + property?.title)
+        DLog.i(LOG_TAG, "property?.id " + property?.id)
+
         if (mIsTabletMode) {
             val fragment = DetailsFragment().apply {
                 arguments = Bundle().apply {
@@ -97,9 +100,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun goToDetailActivity(property: Property?) {
         val intent = Intent(this, DetailActivity::class.java)
-        val bundle = Bundle()
-        bundle.putParcelable(DetailActivity.INTENT_EXTRA_PROPERTY, property)
-        intent.putExtra(DetailActivity.INTENT_EXTRA_BUNDLE, bundle)
+        intent.putExtra(DetailActivity.INTENT_EXTRA_PROPERTY, property)
         startActivity(intent)
     }
 

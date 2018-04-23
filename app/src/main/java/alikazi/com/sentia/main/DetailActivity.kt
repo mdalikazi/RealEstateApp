@@ -25,16 +25,7 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_property_detail)
         initToolbar()
 
-        intent?.extras?.let {
-            if (it.containsKey(INTENT_EXTRA_BUNDLE)) {
-                var bundle = it.getBundle(INTENT_EXTRA_BUNDLE)
-                if (bundle.containsKey(INTENT_EXTRA_PROPERTY)) {
-                    mProperty = it.getParcelable(INTENT_EXTRA_PROPERTY) as Property
-                    DLog.d(LOG_TAG, "mProperty != null")
-                }
-            }
-        }
-
+        mProperty = intent?.extras?.getParcelable(INTENT_EXTRA_PROPERTY) as Property?
         initDetailsFragment()
     }
 
@@ -47,7 +38,7 @@ class DetailActivity : AppCompatActivity() {
         supportFragmentManager
                 .beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .add(R.id.property_detail_activity_fragment_container, fragment)
+                .replace(R.id.property_detail_activity_fragment_container, fragment)
                 .commit()
     }
 
