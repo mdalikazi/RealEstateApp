@@ -26,7 +26,9 @@ class DetailsFragment : Fragment() {
         DLog.i(LOG_TAG, "onCreate")
         arguments?.let {
             if (it.containsKey(INTENT_EXTRA_PROPERTY)) {
-                mProperty = it.getParcelable(INTENT_EXTRA_PROPERTY)
+                mProperty = it.getParcelable(INTENT_EXTRA_PROPERTY) as Property?
+                DLog.d(LOG_TAG, "mProperty != null")
+                DLog.d(LOG_TAG, "mProperty?.title: " + mProperty?.title)
             }
         }
     }
@@ -41,7 +43,11 @@ class DetailsFragment : Fragment() {
                         mProperty?.location?.suburb,
                         mProperty?.location?.postcode)
         view.property_detail_description.text = mProperty?.description
-        view.property_detail_price.text = NumberFormat.getCurrencyInstance().format(mProperty?.price)
+        try {
+            view.property_detail_price.text = NumberFormat.getCurrencyInstance().format(mProperty?.price)
+        } catch (e: Exception) {
+            view.property_detail_price.text = ""
+        }
         return view
     }
 }

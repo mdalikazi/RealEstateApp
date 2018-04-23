@@ -62,7 +62,7 @@
             android:layout_toRightOf="@+id/property_detail_price_label"
             android:layout_marginBottom="8dp"
             android:textSize="18sp"
-            tools:text="1800000"/>
+            tools:text="$1,80,000"/>
 
     </RelativeLayout>
 

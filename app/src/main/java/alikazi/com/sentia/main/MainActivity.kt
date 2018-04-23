@@ -10,6 +10,7 @@ import alikazi.com.sentia.utils.AppConf
 import alikazi.com.sentia.utils.DLog
 import android.app.FragmentTransaction
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -78,6 +79,9 @@ class MainActivity : AppCompatActivity(),
 
     override fun onPropertyItemClick(property: Property?) {
         DLog.i(LOG_TAG, "onPropertyItemClick")
+        DLog.i(LOG_TAG, "property?.title " + property?.title)
+        DLog.i(LOG_TAG, "property?.id " + property?.id)
+
         if (mIsTabletMode) {
             val fragment = DetailsFragment().apply {
                 arguments = Bundle().apply {
@@ -89,7 +93,15 @@ class MainActivity : AppCompatActivity(),
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.property_detail_container, fragment)
                     .commit()
+        } else {
+            goToDetailActivity(property)
         }
+    }
+
+    private fun goToDetailActivity(property: Property?) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.INTENT_EXTRA_PROPERTY, property)
+        startActivity(intent)
     }
 
     private fun handleOrientationChange() {
