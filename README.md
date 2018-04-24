@@ -1,7 +1,5 @@
 # README #
 
-* App name: Sentia Test - Ali Kazi
-
 ### How do I get set up? ###
 
 * If you have trouble compiling, try setting `versionCode = 1` in `app.gradle`
@@ -39,6 +37,4 @@
 * Repo owner or admin  
 Ali Kazi  
 mdalikazi@gmail.com  
-0401553443  
 [LinkedIn](linkedin.com/in/mdalikazi)  
-[Github](github.com/mdalikazi)
