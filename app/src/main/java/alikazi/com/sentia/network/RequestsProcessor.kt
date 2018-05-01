@@ -28,9 +28,8 @@ class RequestsProcessor(context: Context, requestResponseListener: RequestRespon
     fun getProperties() {
         try {
             val builder = Uri.Builder()
-                    .scheme(NetworkConstants.SCHEME_HTTP)
+                    .scheme(NetworkConstants.SCHEME_HTTPS)
                     .authority(NetworkConstants.URL_AUTHORITY)
-                    .appendPath(NetworkConstants.URL_PATH_TEST)
                     .appendPath(NetworkConstants.URL_PATH_PROPERTIES)
 
             val url = URL(builder.build().toString()).toString()

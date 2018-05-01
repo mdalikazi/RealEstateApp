@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Sentia Test - Ali Kazi</string>
+    <string name="app_name">Ali Kazi - Properties App</string>
     <string name="refresh">Refresh</string>
     <string name="feed_empty_list_message">Loading&#8230;</string>
     <string name="feed_empty_list_error_message">Something went wrong</string>
