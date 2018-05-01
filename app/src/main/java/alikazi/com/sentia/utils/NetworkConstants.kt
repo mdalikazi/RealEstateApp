@@ -10,9 +10,8 @@ class NetworkConstants {
         const val SCHEME_HTTP = "http"
         const val SCHEME_HTTPS = "https"
 
-//        http://demo0065087.mockable.io/test/properties
-        const val URL_AUTHORITY = "demo0065087.mockable.io"
-        const val URL_PATH_TEST = "test"
+//        https://demo9649598.mockable.io/properties
+        const val URL_AUTHORITY = "demo9649598.mockable.io"
         const val URL_PATH_PROPERTIES = "properties"
     }
 }
