@@ -1,4 +1,4 @@
-package alikazi.com.sentia.utils
+package alikazi.com.codesample.propertyapp.utils
 
 import android.animation.Animator
 import android.animation.ValueAnimator
@@ -10,7 +10,7 @@ import android.view.animation.DecelerateInterpolator
 /**
  * Created by kazi_ on 15-Apr-18.
  */
-class AnimationUtils {
+class CustomAnimationUtils {
 
     companion object {
         fun animateToolbar(context: Context, toolbar: Toolbar?, listener: ToolbarAnimationListener?) {

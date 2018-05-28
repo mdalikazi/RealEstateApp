@@ -1,9 +1,9 @@
-package alikazi.com.sentia.main
+package alikazi.com.codesample.propertyapp.main
 
-import alikazi.com.sentia.R
-import alikazi.com.sentia.models.Property
-import alikazi.com.sentia.utils.AppConf
-import alikazi.com.sentia.utils.DLog
+import alikazi.com.codesample.propertyapp.models.Property
+import alikazi.com.codesample.propertyapp.utils.AppConf
+import alikazi.com.codesample.propertyapp.utils.DLog
+import alikazi.com.propertyapp.R
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater

@@ -1,14 +1,14 @@
-package alikazi.com.sentia.main
+package alikazi.com.codesample.propertyapp.main
 
-import alikazi.com.sentia.R
-import alikazi.com.sentia.models.Property
-import alikazi.com.sentia.utils.AppConf
-import alikazi.com.sentia.utils.DLog
+import alikazi.com.codesample.propertyapp.models.Property
+import alikazi.com.codesample.propertyapp.utils.AppConf
+import alikazi.com.codesample.propertyapp.utils.DLog
+import alikazi.com.propertyapp.R
 import android.app.FragmentTransaction
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_property_detail.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -44,7 +44,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         DLog.i(LOG_TAG, "initToolbar")
-        setSupportActionBar(property_detail_toolbar)
+        setSupportActionBar(toolbar)
         supportActionBar?.setTitle(R.string.toolbar_title_property_details)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }

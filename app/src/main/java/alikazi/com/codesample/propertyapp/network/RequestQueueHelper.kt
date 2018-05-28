@@ -1,6 +1,6 @@
-package alikazi.com.sentia.network
+package alikazi.com.codesample.propertyapp.network
 
-import alikazi.com.sentia.utils.AppConf
+import alikazi.com.codesample.propertyapp.utils.AppConf
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue

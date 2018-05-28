@@ -1,4 +1,4 @@
-package alikazi.com.sentia.models
+package alikazi.com.codesample.propertyapp.models
 
 import android.support.test.runner.AndroidJUnit4
 import org.junit.Assert.assertTrue

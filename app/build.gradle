@@ -9,7 +9,7 @@ def commitCount = Integer.parseInt(['sh','-c','git rev-list --all --count'].exec
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "alikazi.com.sentia"
+        applicationId 'alikazi.com.codesample.propertyapp'
         minSdkVersion 16
         targetSdkVersion 27
         versionCode commitCount
@@ -25,22 +25,21 @@ android {
     androidExtensions {
         experimental = true
     }
+    productFlavors {
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:' + rootProject.supportLibVersion
     implementation 'com.android.support:recyclerview-v7:' + rootProject.supportLibVersion
     implementation 'com.android.support:cardview-v7:' + rootProject.supportLibVersion
     implementation 'com.android.support:design:' + rootProject.supportLibVersion
-
     // GSON
     implementation 'com.google.code.gson:gson:2.8.2'
-
     // Volley
     implementation 'com.android.volley:volley:1.1.0'
-
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'

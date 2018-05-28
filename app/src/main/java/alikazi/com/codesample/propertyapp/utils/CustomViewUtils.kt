@@ -1,4 +1,4 @@
-package alikazi.com.sentia.utils
+package alikazi.com.codesample.propertyapp.utils
 
 import android.content.Context
 import android.widget.ImageView
@@ -6,7 +6,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 
-class SentiaViewUtils {
+class CustomViewUtils {
 
     companion object {
         fun showCircularPhotoWithGlide(context: Context, url: String?, placeholder: Int, target: ImageView) {
