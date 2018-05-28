@@ -1,11 +1,11 @@
-package alikazi.com.sentia.main
+package alikazi.com.codesample.propertyapp.main
 
-import alikazi.com.sentia.R
-import alikazi.com.sentia.models.Properties
-import alikazi.com.sentia.models.Property
-import alikazi.com.sentia.utils.AppConf
-import alikazi.com.sentia.utils.DLog
-import alikazi.com.sentia.utils.SentiaViewUtils
+import alikazi.com.codesample.propertyapp.models.Properties
+import alikazi.com.codesample.propertyapp.models.Property
+import alikazi.com.codesample.propertyapp.utils.AppConf
+import alikazi.com.codesample.propertyapp.utils.CustomViewUtils
+import alikazi.com.codesample.propertyapp.utils.DLog
+import alikazi.com.propertyapp.R
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
@@ -101,7 +101,7 @@ class RecyclerAdapter(context: Context, itemClickListener: RecyclerItemClickList
                 viewHolder.premiumOwnerName.text = mContext.getString(R.string.property_owner_name_combined,
                         property?.owner?.first_name,
                         property?.owner?.last_name)
-                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.premiumOwnerAvatar)
+                CustomViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.premiumOwnerAvatar)
                 viewHolder.premiumPropertyBedrooms.text = property?.bedrooms.toString()
                 viewHolder.premiumPropertyBathrooms.text = property?.bathrooms.toString()
                 viewHolder.premiumPropertyCarspots.text = property?.carspots.toString()
@@ -133,7 +133,7 @@ class RecyclerAdapter(context: Context, itemClickListener: RecyclerItemClickList
                 viewHolder.basicOwnerName.text = mContext.getString(R.string.property_owner_name_combined,
                         property?.owner?.first_name,
                         property?.owner?.last_name)
-                SentiaViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.basicOwnerAvatar)
+                CustomViewUtils.showCircularPhotoWithGlide(mContext, property?.owner?.avatar?.url, R.drawable.ic_account, viewHolder.basicOwnerAvatar)
                 viewHolder.basicPropertyBedrooms.text = property?.bedrooms.toString()
                 viewHolder.basicPropertyBathrooms.text = property?.bathrooms.toString()
                 viewHolder.basicPropertyCarspots.text = property?.carspots.toString()

@@ -1,13 +1,13 @@
-package alikazi.com.sentia.main
+package alikazi.com.codesample.propertyapp.main
 
-import alikazi.com.sentia.R
-import alikazi.com.sentia.models.Properties
-import alikazi.com.sentia.models.Property
-import alikazi.com.sentia.network.RequestQueueHelper
-import alikazi.com.sentia.network.RequestsProcessor
-import alikazi.com.sentia.utils.AnimationUtils
-import alikazi.com.sentia.utils.AppConf
-import alikazi.com.sentia.utils.DLog
+import alikazi.com.codesample.propertyapp.models.Properties
+import alikazi.com.codesample.propertyapp.models.Property
+import alikazi.com.codesample.propertyapp.network.RequestQueueHelper
+import alikazi.com.codesample.propertyapp.network.RequestsProcessor
+import alikazi.com.codesample.propertyapp.utils.AppConf
+import alikazi.com.codesample.propertyapp.utils.CustomAnimationUtils
+import alikazi.com.codesample.propertyapp.utils.DLog
+import alikazi.com.propertyapp.R
 import android.app.FragmentTransaction
 import android.content.Context
 import android.content.Intent
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 
 class MainActivity : AppCompatActivity(),
         RequestsProcessor.RequestResponseListener,
-        AnimationUtils.ToolbarAnimationListener,
+        CustomAnimationUtils.ToolbarAnimationListener,
         RecyclerAdapter.RecyclerItemClickListener {
 
     companion object {
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(),
         if (savedInstanceState == null) {
             DLog.i(LOG_TAG,"savedInstanceState == null")
             // Start from scratch
-            AnimationUtils.animateToolbar(this, toolbar!!, this)
+            CustomAnimationUtils.animateToolbar(this, toolbar!!, this)
         } else {
             mListItems = savedInstanceState.getParcelable(SAVE_INSTANCE_KEY_FEED)
             handleOrientationChange()
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity(),
     private fun handleOrientationChange() {
         DLog.i(LOG_TAG, "handleOrientationChange")
         val layoutParams = toolbar.layoutParams
-        layoutParams?.height = AnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
+        layoutParams?.height = CustomAnimationUtils.getDefaultActionBarHeightInPixels(this).toInt()
         main_swipe_refresh_layout?.isRefreshing = false
         mRecyclerAdapter?.setListItems(mListItems)
         showHideEmptyListMessage(false)

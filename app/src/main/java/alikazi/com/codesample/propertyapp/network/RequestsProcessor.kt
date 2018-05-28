@@ -1,9 +1,9 @@
-package alikazi.com.sentia.network
+package alikazi.com.codesample.propertyapp.network
 
-import alikazi.com.sentia.models.Properties
-import alikazi.com.sentia.utils.AppConf
-import alikazi.com.sentia.utils.DLog
-import alikazi.com.sentia.utils.NetworkConstants
+import alikazi.com.codesample.propertyapp.models.Properties
+import alikazi.com.codesample.propertyapp.utils.AppConf
+import alikazi.com.codesample.propertyapp.utils.DLog
+import alikazi.com.codesample.propertyapp.utils.NetworkConstants
 import android.content.Context
 import android.net.Uri
 import com.android.volley.Request

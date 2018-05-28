@@ -1,6 +1,6 @@
-package alikazi.com.sentia.utils
+package alikazi.com.codesample.propertyapp.utils
 
-import alikazi.com.sentia.BuildConfig
+import alikazi.com.propertyapp.BuildConfig
 import android.util.Log
 
 /**

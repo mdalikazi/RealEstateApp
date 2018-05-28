@@ -1,4 +1,4 @@
-package alikazi.com.sentia.utils
+package alikazi.com.codesample.propertyapp.utils
 
 /**
  * Created by kazi_ on 15-Apr-18.

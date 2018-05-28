@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="alikazi.com.sentia"
+<manifest package="alikazi.com.propertyapp"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".main.MainActivity"
+            android:name="alikazi.com.codesample.propertyapp.main.MainActivity"
             android:configChanges="orientation"
             android:theme="@style/AppTheme.ToolbarPlaceholder">
             <intent-filter>
@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".main.DetailActivity" />
+        <activity android:name="alikazi.com.codesample.propertyapp.main.DetailActivity" />
 
     </application>
 
