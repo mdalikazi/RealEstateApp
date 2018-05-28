@@ -16,25 +16,16 @@
     - Gson (https://github.com/google/gson)
     In my opinion, Gson is THE go-to library to consume or create JSON.
 
-* There are 2 layouts for the property list items: basic and premium. 
+* 2 layouts for the property list items: basic and premium. 
 
 * Tablet landscape mode is supported with master-detail workflow. A fragment will show property details.  
   When in portrait mode, an activity will show the property details.
 
 * Tests
-    - I have written a simple test for all the parcelable data classes. With more time, I would write tests covering most of the app.
-    
-* Further considerations
-    - With more time, I would add 
-        - Google maps feature to get directions to property address
-        - If pictures were different, I would have added a ViewPager to card items especially for premium listings
-    
-* Git flow
-	- I have used the standard recommended git flow method (pull requests, rebasing etc.). You can see the history of the workflow.
+    - A simple test for all the parcelable data classes. With more time, I would write tests covering most of the app.
 
 ### Who do I talk to? ###
 
 * Repo owner or admin  
-Ali Kazi  
-mdalikazi@gmail.com  
+Ali Kazi   
 [LinkedIn](linkedin.com/in/mdalikazi)  
