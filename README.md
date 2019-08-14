@@ -1,31 +1,17 @@
-# README #
-
-### How do I get set up? ###
-
-* If you have trouble compiling, try setting `versionCode = 1` in `app.gradle`
+<img src="https://i.imgur.com/aXRu5bP.gif" title="By Ali Kazi"/>
 
 ### Summary ###
 
-* Libraries used
-    - Volley (https://github.com/google/volley)  
-    I used volley for network operations as it is a fast, easy to set up and recommended library in the official documentation. It removes a lot of boilerplate code that would need to be implemented otherwise.
+* If you have trouble compiling, try setting `versionCode = 1` in `app.gradle`
 
-    - Glide (https://github.com/bumptech/glide)  
-    I used Glide to load and display images because it is efficient. It loads images lazily which is good for app performance.
-    
-    - Gson (https://github.com/google/gson)
-    In my opinion, Gson is THE go-to library to consume or create JSON.
+* Master-detail workflow: A fragment will show property details on a tablet.  
+  When in portrait mode, an activity will show the property details instead of the fragment.
+
+* A simple test for all the parcelable data classes.
 
 * 2 layouts for the property list items: basic and premium. 
 
-* Tablet landscape mode is supported with master-detail workflow. A fragment will show property details.  
-  When in portrait mode, an activity will show the property details.
+### Repo owner ###
 
-* Tests
-    - A simple test for all the parcelable data classes. With more time, I would write tests covering most of the app.
-
-### Who do I talk to? ###
-
-* Repo owner or admin  
 Ali Kazi   
 [LinkedIn](linkedin.com/in/mdalikazi)  
